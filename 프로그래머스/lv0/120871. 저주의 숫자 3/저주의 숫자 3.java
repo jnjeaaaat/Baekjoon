@@ -1,19 +1,11 @@
 class Solution {
     public int solution(int n) {
         int answer = 0;
-        int k = 0;
-        while (k <= n) {
+        for (int i = 1; i <= n; i++) {
             answer++;
-            if ((answer % 3) == 0) {
-                answer++;
+            if ((answer % 3 == 0) || String.valueOf(answer).contains("3")) {
+                i--;
             }
-            if ((answer % 10) == 3) {
-                answer++;
-            }
-            if (((answer%100)/10) == 3) {
-                answer += 10;
-            }
-            k++;
         }
         return answer;
     }
