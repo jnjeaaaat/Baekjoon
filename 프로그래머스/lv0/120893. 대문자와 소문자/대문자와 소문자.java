@@ -6,10 +6,10 @@ class Solution {
         int A = 'A', Z = 'Z';
         System.out.println(a + "," + z + "," + A + "," + Z);
         for (int i = 0; i < alpha.length; i++) {
-            if (alpha[i] >= 97 && alpha[i] <= 122 ) {
-                answer += String.valueOf(alpha[i]).toUpperCase();
-            } else if (alpha[i] >= 65 && alpha[i] <= 90) {
+            if (Character.isUpperCase(alpha[i])) {
                 answer += String.valueOf(alpha[i]).toLowerCase();
+            } else if (Character.isLowerCase(alpha[i])) {
+                answer += String.valueOf(alpha[i]).toUpperCase();
             }
         }
 
