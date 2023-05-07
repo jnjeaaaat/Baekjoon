@@ -9,11 +9,11 @@ class Solution {
             if (keyinput[i].equals("up")) {
                 if (answer[1] != height) answer[1]++;
             } else if (keyinput[i].equals("down")) {
-                if (answer[1] != height - height*2) answer[1]--;
+                if (answer[1] != -height) answer[1]--;
             } else if (keyinput[i].equals("right")) {
                 if (answer[0] != width) answer[0]++;
             } else if (keyinput[i].equals("left")) {
-                if (answer[0] != width - width*2) answer[0]--;
+                if (answer[0] != -width) answer[0]--;
             }
         }
         return answer;
