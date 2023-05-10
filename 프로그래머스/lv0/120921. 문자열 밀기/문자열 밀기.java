@@ -17,5 +17,8 @@ class Solution {
             answer++;
         }
         return answer;
+        
+        // String tempB = B.repeat(3);
+        // return tempB.indexOf(A);
     }
 }
