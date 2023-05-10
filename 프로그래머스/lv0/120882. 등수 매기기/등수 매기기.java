@@ -15,14 +15,26 @@ class Solution {
         System.out.println(Arrays.toString(ranking));
 
         for (int i = 0; i < ranking.length; i++) {
-            for (int j = 0; j < ranking.length; j++) {
+            for (int j = ranking.length - 1; j >= 0; j--) {
                 if (average[i] == ranking[j]) {
                     answer[i] = j+1;
-                    break;
                 }
             }
         }
 
         return answer;
+        
+//         int[] answer = new int[score.length];
+//         List<Integer> avg = new ArrayList<>();
+//         for (int i = 0; i < score.length; i++) {
+//             avg.add(score[i][0] + score[i][1]);
+//         }
+
+//         avg.sort(Comparator.reverseOrder());
+
+//         for (int i = 0; i < avg.size(); i++) {
+//             answer[i] = avg.indexOf(score[i][0] + score[i][1]) + 1;
+//         }
+//         return answer;
     }
 }
