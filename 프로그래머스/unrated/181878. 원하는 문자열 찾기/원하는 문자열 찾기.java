@@ -4,8 +4,6 @@ class Solution {
         
         if (myString.toLowerCase().contains(pat.toLowerCase())) {
             answer = 1;
-        } else if (!myString.toLowerCase().contains(pat.toLowerCase())) {
-            answer = 0;
         }
         
         return answer;
