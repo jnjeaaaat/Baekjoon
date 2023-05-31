@@ -1,15 +1,15 @@
 class Solution {
     public String solution(String myString) {
-        String answer = "";
+//         String answer = "";
         
-        for (char ch : myString.toCharArray()) {
-            if (ch < 'l') {
-                answer += 'l';
-            } else {
-                answer += ch;
-            }
-        }
-        
-        return answer;
+//         for (char ch : myString.toCharArray()) {
+//             if (ch < 'l') {
+//                 answer += 'l';
+//             } else {
+//                 answer += ch;
+//             }
+//         }
+        myString = myString.replaceAll("[^l-z]", "l");
+        return myString;
     }
 }
