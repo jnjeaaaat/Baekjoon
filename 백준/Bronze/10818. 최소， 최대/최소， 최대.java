@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -13,10 +12,17 @@ public class Main {
             numbers[i] = scanner.nextInt();
         }
 
-        Arrays.sort(numbers);
+        int min = 1000001;
+        int max = -1000001;
 
-        int min = numbers[0];
-        int max = numbers[numbers.length - 1];
+        for (int i : numbers) {
+            if (i < min) {
+                min = i;
+            }
+            if (i > max) {
+                max = i;
+            }
+        }
 
         System.out.println(min + " " + max);
     }
