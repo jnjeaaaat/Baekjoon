@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -8,10 +12,12 @@ public class Main {
     public static int N;
     public static boolean isVisit[];
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+//        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        N = scanner.nextInt();
+//        N = scanner.nextInt();
+        N = Integer.parseInt(br.readLine());
         parents = new int[N+1];
         isVisit = new boolean[N+1];
         list = new ArrayList[N+1];
@@ -21,8 +27,11 @@ public class Main {
         }
 
         for (int i = 0; i < N - 1; i++) {
-            int a = scanner.nextInt();
-            int b = scanner.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+//            int a = scanner.nextInt();
+//            int b = scanner.nextInt();
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
 
             list[a].add(b);
             list[b].add(a);
