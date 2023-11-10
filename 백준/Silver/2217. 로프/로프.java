@@ -10,19 +10,14 @@ public class Main {
         for (int i = 0; i < N; i++) {
             ropes[i] = scanner.nextInt();
         }
-        ////////////////////////////////////////////////////////////
 
         Arrays.sort(ropes);
 
-        List<Integer> list = new ArrayList<>();
-
+        int max = Integer.MIN_VALUE;
         for (int i = 0; i < N; i++) {
-            int sum = ropes[i] * (N - i);
-            list.add(sum);
+            max = Math.max(max, ropes[i] * (N - i));
         }
 
-        list.sort(Collections.reverseOrder());
-
-        System.out.println(list.get(0));
+        System.out.println(max);
     }
 }
