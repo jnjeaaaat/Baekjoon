@@ -1,9 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -14,7 +13,7 @@ public class Main {
     int N = Integer.parseInt(br.readLine());
 
     StringTokenizer st;
-    List<Integer> queue = new ArrayList<>();
+    PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
     for (int i = 0; i < N; i++) {
       st = new StringTokenizer(br.readLine());
       for (int j = 0; j < N; j++) {
@@ -22,8 +21,12 @@ public class Main {
       }
     }
 
-    Collections.sort(queue);
-    System.out.println(queue.get(N * N - N));
+    int[] answer = new int[N];
+    for (int i = 0; i < N; i++) {
+      answer[i] = queue.poll();
+    }
+
+    System.out.println(answer[N - 1]);
 
   }
 
