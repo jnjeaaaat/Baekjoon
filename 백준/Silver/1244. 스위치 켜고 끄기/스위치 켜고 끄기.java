@@ -66,4 +66,5 @@ public class Main {
     private static void changeLight(int[] arr, int index) {
         arr[index] = arr[index] == 1 ? 0 : 1;
     }
+
 }
