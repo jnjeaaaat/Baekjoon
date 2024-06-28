@@ -32,25 +32,17 @@ public class Main {
                     head = new Node(i, j);
 
                     continue loop;
-                }
-
-                else if (head != null && i == head.x + 1) {
+                } else if (head != null && i == head.x + 1) {
                     if (j < head.y && board[i][j] == '*') {
                         leftArm++;
                     } else if (j > head.y && board[i][j] == '*') {
                         rightArm++;
                     }
-                }
-
-                else if (head != null && i > head.x + 1 && j == head.y && board[i][j] == '*') {
+                } else if (head != null && i > head.x + 1 && j == head.y && board[i][j] == '*') {
                     waist++;
-                }
-
-                else if (head != null && i > head.x + 2 && j < head.y && board[i][j] == '*') {
+                } else if (head != null && i > head.x + 2 && j < head.y && board[i][j] == '*') {
                     leftLeg++;
-                }
-
-                else if (head != null && i > head.x + 2 && j > head.y && board[i][j] == '*') {
+                } else if (head != null && i > head.x + 2 && j > head.y && board[i][j] == '*') {
                     rightLeg++;
                 }
             }
