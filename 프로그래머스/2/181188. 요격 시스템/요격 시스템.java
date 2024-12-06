@@ -5,23 +5,25 @@ class Solution {
         int answer = 0;
         
         List<Node> list = new ArrayList<>();
+        
         for (int i = 0; i < targets.length; i++) {
-            list.add(new Node(targets[i][0], targets[i][1]));
+            int[] temp = targets[i];
+            
+            list.add(new Node(temp[0], temp[1]));
         }
         
         Collections.sort(list);
         
-        int end = 0;
-        for (Node node : list) {
-            if (node.start >= end) {
-                end = node.end;
+        int end = list.get(0).start;
+        for (Node n : list) {
+            if (n.start >= end) {
                 answer++;
+                end = n.end;
             }
         }
         
         return answer;
     }
-    
 }
 
 class Node implements Comparable<Node> {
@@ -34,12 +36,6 @@ class Node implements Comparable<Node> {
     }
     
     public int compareTo(Node o) {
-        int result = Integer.compare(this.end, o.end);
-        
-//         if (result == 1) {
-//             result = Integer.compare(this.start, o.start);
-//         }
-        
-        return result;
+        return Integer.compare(this.end, o.end);
     }
 }
