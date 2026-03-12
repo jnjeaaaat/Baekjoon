@@ -1,37 +1,37 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
 
-        int T = scanner.nextInt();
+        Stack<Character> stack;
+        String str;
+        for (int t = 0; t < T; t++) {
+            stack = new Stack<>();
+            str = br.readLine();
 
-        for (int i = 0; i < T; i++) {
-            System.out.println(solution(scanner.next()));
-        }
-
-    }
-
-    public static String solution(String str) {
-        Stack<Character> stack = new Stack<>();
-
-        for (char c : str.toCharArray()) {
-            if (c == '(') {
-                stack.push(c);
-            } else {
-                if (stack.empty()) {
-                    return "NO";
-                } else {
+            for (char ch : str.toCharArray()) {
+                if (stack.isEmpty() || ch == '(') {
+                    stack.push(ch);
+                } else if (stack.peek() == '(' && ch == ')') {
                     stack.pop();
                 }
             }
+
+            if (!stack.isEmpty()) {
+                sb.append("NO");
+            } else {
+                sb.append("YES");
+            }
+
+            sb.append("\n");
         }
 
-        if (stack.empty()) {
-            return "YES";
-        } else {
-            return "NO";
-        }
+        System.out.println(sb);
     }
 }
