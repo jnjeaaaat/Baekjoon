@@ -1,27 +1,29 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Deque;
 import java.util.LinkedList;
+
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
 
-        Deque<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-            queue.offer(i + 1);
+        LinkedList<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < N; i++) {
+            queue.add(i + 1);
         }
 
         while (queue.size() > 1) {
             queue.pollFirst();
-            queue.offerLast(queue.pollFirst());
+
+            if (queue.size() > 1) {
+                int tmp = queue.pollFirst();
+                queue.addLast(tmp);
+            }
         }
 
-        System.out.println(queue.poll());
-
+        System.out.println(queue.peek());
     }
 }
