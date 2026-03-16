@@ -6,44 +6,23 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
 
-        int[] arr = new int[N];
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            map.put(Integer.parseInt(st.nextToken()), 1);
         }
-        Arrays.sort(arr);
-
+        
         int M = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
-
         for (int i = 0; i < M; i++) {
             int value = Integer.parseInt(st.nextToken());
-
-            int left = 0;
-            int right = N - 1;
-            int mid = 0;
-            while (left <= right) {
-                mid = (left + right) / 2;
-
-                if (arr[mid] > value) {
-                    right = mid - 1;
-                } else if (arr[mid] < value) {
-                    left = mid + 1;
-                } else {
-                    break;
-                }
-            }
             
-            if (arr[mid] == value) {
-                sb.append('1').append('\n');
-            } else {
-                sb.append('0').append('\n');
-            }
+            sb.append(map.getOrDefault(value, 0)).append('\n');
         }
 
         System.out.println(sb);
