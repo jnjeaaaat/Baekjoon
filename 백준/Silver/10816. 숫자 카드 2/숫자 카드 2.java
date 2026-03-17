@@ -9,24 +9,22 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
 
-        Map<Integer, Integer> map = new HashMap<>();
+        int[] arr = new int[20_000_001];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             int card = Integer.parseInt(st.nextToken());
+            card += 10_000_000;
 
-            map.put(card, map.getOrDefault(card, 0) + 1);
+            arr[card]++;
         }
 
         int m = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < m; i++) {
             int value = Integer.parseInt(st.nextToken());
+            value += 10_000_000;
 
-            if (map.containsKey(value)) {
-                sb.append(map.get(value)).append(' ');
-            } else {
-                sb.append(0).append(' ');
-            }
+            sb.append(arr[value]).append(' ');
         }
 
         System.out.println(sb);
