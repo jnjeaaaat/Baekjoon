@@ -10,16 +10,14 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        int nFac = 1;
+        int fac = 1;
         for (int i = n; i > n - k; i--) {
-            nFac *= i;
+            fac *= i;
         }
-
-        int kFac = 1;
         for (int i = k; i > 0; i--) {
-            kFac *= i;
+            fac /= i;
         }
 
-        System.out.println(nFac / kFac);
+        System.out.println(fac);
     }
 }
