@@ -10,18 +10,18 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         StringTokenizer st;
-        List<Point> list = new ArrayList<>();
+        Point[] arr = new Point[n];
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
 
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
 
-            list.add(new Point(x, y));
+            arr[i] = new Point(x, y);
         }
 
-        Collections.sort(list);
-        for (Point p : list) {
+        Arrays.sort(arr);
+        for (Point p : arr) {
             sb.append(p.x).append(' ').append(p.y).append('\n');
         }
 
