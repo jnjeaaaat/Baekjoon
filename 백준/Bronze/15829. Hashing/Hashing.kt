@@ -1,7 +1,6 @@
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import kotlin.math.pow
 
 @Throws(IOException::class)
 fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
@@ -10,11 +9,12 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
     val str = readLine()
 
     var sum = 0L
-    val r = 31.toDouble()
-    repeat(L) { i ->
-        val cur = (str[i] - 'a') + 1
-        val beforeSum = (cur * (r.pow(i) % M)).toInt()
-        sum += beforeSum % M
+    var r = 1L // 31^0
+    for (i in 0 until L) {
+        val cur = str[i] - 'a' + 1
+        sum += (cur * r % M) % M
+
+        r = (r * 31L) % M
     }
 
     print(sum)
