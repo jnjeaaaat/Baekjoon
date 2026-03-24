@@ -12,7 +12,7 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
     var r = 1L // 31^0
     for (i in 0 until L) {
         val cur = str[i] - 'a' + 1
-        sum += (cur * r % M) % M
+        sum = (sum + (cur * r) % M) % M
 
         r = (r * 31L) % M
     }
