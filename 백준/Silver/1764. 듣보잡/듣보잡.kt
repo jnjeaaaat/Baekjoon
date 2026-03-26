@@ -1,10 +1,17 @@
 fun main() {
-    val (n, m) = readln().split(" ").map { it.toInt() }
-    val a = List(n) { readln() }.toSet()
-    val b = List(m) { readln() }.toSet()
+    val (n, m) = readln().split(" ").map(String::toInt)
+    val freq = mutableMapOf<String, Int>()
 
-    val common = (a intersect b).sorted()
+    repeat(n + m) {
+        val s = readln()
+        freq[s] = (freq[s] ?: 0) + 1
+    }
 
-    println(common.size)
-    print(common.joinToString("\n"))
+    val result = freq
+        .filterValues { it > 1 }
+        .keys
+        .sorted()
+
+    println(result.size)
+    print(result.joinToString("\n"))
 }
