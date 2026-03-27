@@ -21,9 +21,4 @@ fun main() {
     print(count)
 }
 
-data class Meeting(val start: Int, val end: Int) : Comparable<Meeting> {
-    override fun compareTo(other: Meeting): Int {
-        val result = end.compareTo(other.end)
-        return if (result == 0) start.compareTo(other.start) else result
-    }
-}
+data class Meeting(val start: Int, val end: Int)
