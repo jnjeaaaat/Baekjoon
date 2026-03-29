@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
         int[][] board = new int[n][m];
@@ -58,10 +59,12 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                System.out.print(count[i][j] + " ");
+                sb.append(count[i][j]).append(' ');
             }
-            System.out.println();
+            sb.append('\n');
         }
+        
+        System.out.println(sb);
     }
 
     static class Node {
