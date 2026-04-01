@@ -3,29 +3,9 @@ import java.util.*
 fun main() {
     val T = readln().toInt()
 
-    fun remove(queue: PriorityQueue<Int>, map: MutableMap<Int, Int>): Int {
-        var cur = 0
-
-        while (true) {
-            cur = queue.poll()
-
-            val cnt = map[cur] ?: 0
-            if (cnt == 0) continue
-
-            if (cnt == 1) map.remove(cur)
-            else map[cur] = cnt - 1
-
-            break
-        }
-
-        return cur
-    }
-
     val sb = buildString {
         repeat(T) {
-            val minQueue = PriorityQueue<Int>()
-            val maxQueue = PriorityQueue<Int>(reverseOrder())
-            val map = mutableMapOf<Int, Int>()
+            val map = TreeMap<Int, Int>()
 
             val n = readln().toInt()
 
@@ -37,8 +17,6 @@ fun main() {
                 when (op) {
                     'I' -> {
                         map[num] = (map[num] ?: 0) + 1
-                        minQueue.add(num)
-                        maxQueue.add(num)
                     }
 
                     'D' -> {
@@ -46,9 +24,16 @@ fun main() {
                             continue
                         }
 
+                        var cur = 0
                         when (num) {
-                            1 -> remove(maxQueue, map)
-                            -1 -> remove(minQueue, map)
+                            1 -> cur = map.lastKey()
+                            -1 -> cur = map.firstKey()
+                        }
+
+                        if (map[cur] == 1) {
+                            map.minusAssign(cur)
+                        } else {
+                            map[cur] = (map[cur] ?: 0) - 1
                         }
                     }
                 }
@@ -57,9 +42,8 @@ fun main() {
             if (map.isEmpty()) {
                 appendLine("EMPTY")
             } else {
-                val res = remove(maxQueue, map)
-                append(res).append(' ')
-                appendLine(if (map.isNotEmpty()) remove(minQueue, map) else res)
+                append(map.lastKey()).append(' ')
+                appendLine(map.firstKey())
             }
         }
     }
