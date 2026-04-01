@@ -5,26 +5,26 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder("I");
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
         String str = br.readLine();
 
-        sb.append("OI".repeat(n));
-
+        int i = 0;
         int count = 0;
-        while (true) {
-            int idx = str.indexOf(sb.toString());
-            if (idx != -1) {
+        int answer = 0;
+        while (i + 2 < m) {
+            if (str.charAt(i) == 'I' && str.charAt(i + 1) == 'O' && str.charAt(i + 2) == 'I') {
                 count++;
-                str = str.substring(idx + 1);
+                if (count >= n) {
+                    answer++;
+                }
+                i += 2;
             } else {
-                break;
+                count = 0;
+                i++;
             }
         }
-
-        System.out.println(count);
+        
+        System.out.println(answer);
     }
 }
-
-// 티티벡 크림
