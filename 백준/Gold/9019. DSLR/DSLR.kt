@@ -3,44 +3,45 @@ fun main() {
 
     fun bfs(start: Int, target: Int): String {
         val visited = BooleanArray(10_000)
-        val queue = ArrayDeque<Pair<Int, String>>()
+        val queue = ArrayDeque<Node>()
 
-        queue.addLast(start to "")
+        queue.addLast(Node(start, ""))
         visited[start] = true
 
         while (queue.isNotEmpty()) {
-            val (n, cmd) = queue.removeFirst()
+            val cur = queue.removeFirst()
+            val n = cur.value
 
             if (n == target) {
-                return cmd
+                return cur.cmd
             }
 
             // D
             val d = (n * 2) % 10_000
             if (!visited[d]) {
                 visited[d] = true
-                queue.addLast(d to cmd + "D")
+                queue.addLast(Node(d, cur.cmd + "D"))
             }
 
             // S
             val s = if (n == 0) 9999 else n - 1
             if (!visited[s]) {
                 visited[s] = true
-                queue.addLast(s to cmd + "S")
+                queue.addLast(Node(s, cur.cmd + "S"))
             }
 
             // L
             val l = n % 1000 * 10 + n / 1000
             if (!visited[l]) {
                 visited[l] = true
-                queue.addLast(l to cmd + "L")
+                queue.addLast(Node(l, cur.cmd + "L"))
             }
 
             // R
             val r = n % 10 * 1000 + n / 10
             if (!visited[r]) {
                 visited[r] = true
-                queue.addLast(r to cmd + "R")
+                queue.addLast(Node(r, cur.cmd + "R"))
             }
 
         }
@@ -58,3 +59,5 @@ fun main() {
 
     print(sb)
 }
+
+data class Node(val value: Int, val cmd: String)
