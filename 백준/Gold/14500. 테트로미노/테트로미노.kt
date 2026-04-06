@@ -1,8 +1,15 @@
 fun main() {
     val (n, m) = readln().split(" ").map { it.toInt() }
-    val board = Array(n) { readln().split(" ").map { it.toInt() }.toIntArray() }
-    val visited = Array(n) { BooleanArray(m) }
+    var maxValue = 0
     var max = 0
+    val visited = Array(n) { BooleanArray(m) }
+    val board = Array(n) {
+        val input = readln().split(" ").map { it.toInt() }.toIntArray()
+        for (i in input) {
+            maxValue = maxOf(maxValue, i)
+        }
+        input
+    }
 
     val dx = intArrayOf(1, -1, 0, 0)
     val dy = intArrayOf(0, 0, 1, -1)
@@ -12,6 +19,10 @@ fun main() {
     }
 
     fun dfs(x: Int, y: Int, sum: Int, depth: Int) {
+        if (sum + maxValue * (4 - depth) <= max) {
+            return
+        }
+        
         if (depth == 4) {
             max = maxOf(max, sum)
             return
