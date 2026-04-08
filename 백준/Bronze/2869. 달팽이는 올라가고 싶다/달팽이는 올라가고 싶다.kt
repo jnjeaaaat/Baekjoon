@@ -1,7 +1,10 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
+fun main() {
+    val (up, down, v) = readln().split(" ").map { it.toInt() }
 
-fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
-    val (a, b, v) = readLine().split(" ").map { s -> s.toInt() }
-    print(((v - a) + (a - b) - 1) / (a - b) + 1)
+    var day = (v - down) / (up - down)
+    if ((v - down) % (up - down) != 0) {
+        day++
+    }
+
+    print(day)
 }
