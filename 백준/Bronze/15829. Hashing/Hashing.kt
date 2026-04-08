@@ -1,20 +1,15 @@
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
+const val MOD = 1_234_567_891
 
-@Throws(IOException::class)
-fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
-    val M = 1_234_567_891L
-    val L = readLine().toInt()
-    val str = readLine()
+fun main() {
+    val n = readln().toInt()
+    val str = readln()
+    var r = 1
 
-    var sum = 0L
-    var r = 1L // 31^0
-    for (i in 0 until L) {
-        val cur = str[i] - 'a' + 1
-        sum = (sum + (cur * r) % M) % M
-
-        r = (r * 31L) % M
+    var sum = 0
+    for (i in 0 until n) {
+        val num = str[i] - 'a' + 1
+        sum += (num * r) % MOD
+        r = (r * 31) % MOD
     }
 
     print(sum)
