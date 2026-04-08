@@ -8,7 +8,7 @@ fun main() {
     var sum = 0
     for (i in 0 until n) {
         val num = str[i] - 'a' + 1
-        sum += (num * r) % MOD
+        sum = (sum + (num * r) % MOD) % MOD
         r = (r * 31) % MOD
     }
 
