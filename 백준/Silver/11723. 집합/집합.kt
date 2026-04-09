@@ -1,28 +1,24 @@
-import java.util.*
-
 fun main() {
-    val m = readln().toInt()
-    val sb = StringBuilder()
+    val n = readln().toInt()
 
     var bit = 0
-    repeat(m) {
-        val st = StringTokenizer(readln())
-        val op = st.nextToken()
+    val sb = buildString {
+        repeat(n) {
+            val input = readln()
 
-        when (op) {
-            "all" -> bit = (1 shl 20) - 1
-            "empty" -> bit = 0
-            else -> {
-                val x = st.nextToken().toInt()
-                val mask = (1 shl (x - 1))
-
-                when (op) {
-                    "add" -> bit = bit or mask
-                    "remove" -> bit = bit and mask.inv()
-                    "toggle" -> bit = bit xor mask
-                    else -> sb.appendLine(
-                        if (bit and mask != 0) 1 else 0
-                    )
+            when (input) {
+                "all" -> bit = 0.inv()
+                "empty" -> bit = 0
+                else -> {
+                    val op = input.split(" ")[0]
+                    val x = input.split(" ")[1].toInt()
+                    val num = 1.shl(x - 1)
+                    when (op) {
+                        "add" -> bit = bit or num
+                        "remove" -> bit = bit and num.inv()
+                        "toggle" -> bit = bit xor num
+                        else -> appendLine(if (bit and num != 0) 1 else 0)
+                    }
                 }
             }
         }
