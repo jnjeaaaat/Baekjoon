@@ -1,39 +1,55 @@
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 import java.util.*
 
-fun main() {
-    val T = readln().toInt()
+@Throws(IOException::class)
+fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
+    val T = readLine().toInt()
 
     val sb = buildString {
         repeat(T) {
-            val map = TreeMap<Int, Int>()
+            val n = readLine().toInt()
+            val minQue = PriorityQueue<Int>()
+            val maxQue = PriorityQueue<Int>(reverseOrder())
+            val map = mutableMapOf<Int, Int>()
 
-            val n = readln().toInt()
+            fun delete(queue: PriorityQueue<Int>, map: MutableMap<Int, Int>): Int {
+                var target = 0
 
-            for (i in 0 until n) {
-                val str = readln().split(" ")
-                val op = str[0][0]
-                val num = str[1].toInt()
+                while (queue.isNotEmpty()) {
+                    target = queue.poll()
 
-                when (op) {
-                    'I' -> {
+                    if (!map.contains(target)) continue
+
+                    if (map[target]!! - 1 == 0) {
+                        map.remove(target)
+                    } else {
+                        map[target] = map[target]!! - 1
+                    }
+                    break
+                }
+
+                return target
+            }
+
+            repeat(n) {
+                val (cmd, value) = readLine().split(" ")
+                val num = value.toInt()
+                when (cmd) {
+                    "I" -> {
+                        minQue.add(num)
+                        maxQue.add(num)
+
                         map[num] = (map[num] ?: 0) + 1
                     }
 
-                    'D' -> {
-                        if (map.isEmpty()) {
-                            continue
-                        }
-
-                        var cur = 0
-                        when (num) {
-                            1 -> cur = map.lastKey()
-                            -1 -> cur = map.firstKey()
-                        }
-
-                        if (map[cur] == 1) {
-                            map.minusAssign(cur)
-                        } else {
-                            map[cur] = (map[cur] ?: 0) - 1
+                    "D" -> {
+                        if (!map.isEmpty()) {
+                            when (num) {
+                                1 -> delete(maxQue, map)
+                                -1 -> delete(minQue, map)
+                            }
                         }
                     }
                 }
@@ -42,8 +58,15 @@ fun main() {
             if (map.isEmpty()) {
                 appendLine("EMPTY")
             } else {
-                append(map.lastKey()).append(' ')
-                appendLine(map.firstKey())
+                val res = delete(maxQue, map)
+
+                append(res).append(' ')
+                    .appendLine(
+                        if (map.isNotEmpty())
+                            delete(minQue, map)
+                        else
+                            res
+                    )
             }
         }
     }
