@@ -1,38 +1,30 @@
-import java.util.*
-
 fun main() {
-    var st = StringTokenizer(readln())
-    val n = st.nextToken().toInt()
-    val m = st.nextToken().toInt()
+    val (n, m) = readln().split(" ").map { it.toInt() }
+    var max = 0
+    val trees = readln()
+        .split(" ")
+        .map { it.toInt() }
+        .onEach { max = maxOf(max, it) }
+        .toIntArray()
 
-    val trees = LongArray(n)
-    var max = 0L
-    st = StringTokenizer(readln())
-    for (i in trees.indices) {
-        trees[i] = st.nextToken().toLong()
-        max = maxOf(trees[i], max)
-    }
-
-    fun canCut(mid: Long): Boolean {
+    fun canCut(mid: Int): Boolean {
         var sum = 0L
-        for (trees in trees) {
-            if (trees > mid) {
-                sum += (trees - mid)
-            }
 
-            if (sum >= m) {
-                return true
+        for (i in trees) {
+            if (i > mid) {
+                sum += i - mid
             }
         }
 
-        return false
+        return sum >= m
     }
 
-    var left = 0L
+    var left = 0
     var right = max
-    var answer = 0L
+    var answer = 0
     while (left <= right) {
         val mid = (left + right) / 2
+
         if (canCut(mid)) {
             answer = mid
             left = mid + 1
