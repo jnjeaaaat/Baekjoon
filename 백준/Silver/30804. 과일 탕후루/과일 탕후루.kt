@@ -1,32 +1,22 @@
-import java.io.*
-import java.util.*
-
-@Throws(IOException::class)
-fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
-    val n = readLine().toInt();
-    val st = StringTokenizer(readLine())
-    val S = IntArray(n) {
-        st.nextToken().toInt()
-    }
-    val fruits = IntArray(10)
+fun main() {
+    val n = readln().toInt()
+    val tang = readln().split(" ").map(String::toInt)
+    val map = mutableMapOf<Int, Int>()
 
     var left = 0
     var right = 0
-    var kindCount = 0
     var max = 0
     while (right < n) {
-        val fruit = S[right]
-        if (fruits[fruit] == 0) {
-            kindCount++
-        }
-        fruits[fruit]++
+        val rFruit = tang[right]
+        map[rFruit] = (map[rFruit] ?: 0) + 1
 
-        while (kindCount > 2) {
-            val leftFruit = S[left]
-            fruits[leftFruit]--
-            if (fruits[leftFruit] == 0) {
-                kindCount--
+        while (map.size > 2) {
+            val lFruit = tang[left]
+            map[lFruit] = map[lFruit]!! - 1
+            if (map[lFruit] == 0) {
+                map.remove(lFruit)
             }
+
             left++
         }
 
