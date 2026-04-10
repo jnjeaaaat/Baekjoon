@@ -1,63 +1,49 @@
 fun main() {
-    val N = readln().toInt()
-
-    fun bfs(start: Int, target: Int): String {
-        val visited = BooleanArray(10_000)
-        val queue = ArrayDeque<Node>()
-
-        queue.addLast(Node(start, ""))
-        visited[start] = true
-
-        while (queue.isNotEmpty()) {
-            val cur = queue.removeFirst()
-            val n = cur.value
-
-            if (n == target) {
-                return cur.cmd
-            }
-
-            // D
-            val d = (n * 2) % 10_000
-            if (!visited[d]) {
-                visited[d] = true
-                queue.addLast(Node(d, cur.cmd + "D"))
-            }
-
-            // S
-            val s = if (n == 0) 9999 else n - 1
-            if (!visited[s]) {
-                visited[s] = true
-                queue.addLast(Node(s, cur.cmd + "S"))
-            }
-
-            // L
-            val l = n % 1000 * 10 + n / 1000
-            if (!visited[l]) {
-                visited[l] = true
-                queue.addLast(Node(l, cur.cmd + "L"))
-            }
-
-            // R
-            val r = n % 10 * 1000 + n / 10
-            if (!visited[r]) {
-                visited[r] = true
-                queue.addLast(Node(r, cur.cmd + "R"))
-            }
-
-        }
-
-        return ""
-    }
-
+    val T = readln().toInt()
     val sb = buildString {
-        repeat(N) {
+        repeat(T) {
             val (a, b) = readln().split(" ").map { it.toInt() }
+            val visited = BooleanArray(10_001)
 
-            appendLine(bfs(a, b))
+            val queue = ArrayDeque<Pair<Int, String>>()
+            queue.addLast(a to "")
+            visited[a] = true
+
+            while (queue.isNotEmpty()) {
+                val (num, dslr) = queue.removeFirst()
+
+                if (num == b) {
+                    appendLine(dslr)
+                    break
+                }
+
+                // d
+                val d = (2 * num) % 10_000
+                if (!visited[d]) {
+                    visited[d] = true
+                    queue.addLast(d to dslr + "D")
+                }
+                // s
+                val s = if (num == 0) 9999 else num - 1
+                if (!visited[s]) {
+                    visited[s] = true
+                    queue.addLast(s to dslr + "S")
+                }
+                // l
+                val l = (num % 1000) * 10 + num / 1000
+                if (!visited[l]) {
+                    visited[l] = true
+                    queue.addLast(l to dslr + "L")
+                }
+                // r
+                var r = (num % 10) * 1000 + num / 10
+                if (!visited[r]) {
+                    visited[r] = true
+                    queue.addLast(r to dslr + "R")
+                }
+            }
         }
     }
 
     print(sb)
 }
-
-data class Node(val value: Int, val cmd: String)
